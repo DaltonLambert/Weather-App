@@ -43,7 +43,7 @@ public class JdbcWeatherDao implements WeatherDao {
     }
     @Override
     public List<Weather> findByLocation(String location){
-        String sql = "SELECT * FROM weather WHERE location = ?";
+        String sql = "SELECT * FROM weather WHERE location_name = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, location);
         List<Weather> weathers = new ArrayList<>();
         while(results.next()){
@@ -55,7 +55,7 @@ public class JdbcWeatherDao implements WeatherDao {
 
     @Override
     public Weather createWeather(Weather weather){
-        String sql = "INSERT INTO weather (location, temperature, timestamp) VALUES (?, ?, ?) returning id";
+        String sql = "INSERT INTO weather (location_name, temperature, date) VALUES (?, ?, ?) returning id";
         int newId = jdbcTemplate.queryForObject(sql, int.class, weather.getLocation(), weather.getTemperature(), weather.getTimestamp());
         return findById(newId);
     }
