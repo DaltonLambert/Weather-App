@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface WeatherDao {
     List<Weather> findAll();
-    Weather findById(Long id);
+    Weather findById(int id);
 
-    List<Weather> findByCityName(String cityName);
+    List<Weather> findByLocation(String location);
+
+    Weather createWeather(Weather weather);
 }
 
