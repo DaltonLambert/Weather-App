@@ -4,8 +4,12 @@ import com.dalton.WeatherApp.dao.JdbcWeatherDao;
 import com.dalton.WeatherApp.model.Weather;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -27,8 +31,36 @@ public class WeatherController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Weather> findAll() {
-        return weatherDao.findAll();
+        // Initialize the list that will store the weather data
+        List<Weather> weatherList = new ArrayList<>();
+
+        // Define the API endpoint URL and your API key
+        String apiUrl = "http://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}";
+        String apiKey = System.getenv("API_KEY");
+
+        // Define the cities that you want to retrieve weather information for
+        String[] cities = {"London", "Paris", "Florida", "Tokyo", "Tampa", "New York"};
+
+        // Use the RestTemplate to make a request to the OpenWeatherMap API for each city
+        RestTemplate restTemplate = new RestTemplate();
+        for (String city : cities) {
+            Map<String, Object> response = restTemplate.getForObject(apiUrl, Map.class, city, apiKey);
+
+
+            // Extract the location name and temperature from the response
+            String locationName = (String) response.get("name");
+            double temperature = (double) ((Map<String, Object>) response.get("main")).get("temp");
+
+            // Convert the temperature from Kelvin to Fahrenheit
+            double temperatureFahrenheit = (temperature - 273.15) * 9 / 5 + 32;
+
+            // Create a new Weather object and add it to the weatherList
+            weatherList.add(new Weather(locationName, temperatureFahrenheit));
+        }
+
+        return weatherList;
     }
+
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Weather findById(@PathVariable int id) {
