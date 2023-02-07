@@ -71,7 +71,7 @@ public class WeatherController {
     @RequestMapping(value = "/location/{location}", method = RequestMethod.GET)
     public Weather findByLocation(@PathVariable String location){
         // Define the API endpoint URL and your API key
-        String apiUrl = "http://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}";
+        String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}";
         String apiKey = System.getenv("API_KEY");
 
         // Use the RestTemplate to make a request to the OpenWeatherMap API for the specified location
