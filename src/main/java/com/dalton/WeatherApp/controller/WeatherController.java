@@ -49,13 +49,23 @@ public class WeatherController {
 
             // Extract the location name and temperature from the response
             String locationName = (String) response.get("name");
+            Integer humidity = (Integer) ((Map<String, Object>) response.get("main")).get("humidity");
+
+            // Check if the humidity value is not null
+            if(humidity == null){
+                // Throw an exception if the humidity value is null
+                throw new NullPointerException("Humidity value is null");
+            }
+
+            // Convert the humidity value to int
+            int humidityValue = humidity.intValue();
             double temperature = (double) ((Map<String, Object>) response.get("main")).get("temp");
 
             // Convert the temperature from Kelvin to Fahrenheit
             double temperatureFahrenheit = (temperature - 273.15) * 9 / 5 + 32;
 
             // Create a new Weather object and add it to the weatherList
-            weatherList.add(new Weather(locationName, temperatureFahrenheit));
+            weatherList.add(new Weather(locationName, temperatureFahrenheit, humidityValue));
         }
 
         return weatherList;
@@ -80,13 +90,23 @@ public class WeatherController {
 
         // Extract the location name and temperature from the response
         String locationName = (String) response.get("name");
+        Integer humidity = (Integer) ((Map<String, Object>) response.get("main")).get("humidity");
+
+        // Check if the humidity value is not null
+        if(humidity == null){
+            // Throw an exception if the humidity value is null
+            throw new NullPointerException("Humidity value is null");
+        }
+
+        // Convert the humidity value to int
+        int humidityValue = humidity.intValue();
         double temperature = (double) ((Map<String, Object>) response.get("main")).get("temp");
 
         // Convert the temperature from Kelvin to Fahrenheit
         double temperatureFahrenheit = (temperature - 273.15) * 9 / 5 + 32;
 
         // Create a new Weather object and return it
-        return new Weather(locationName, temperatureFahrenheit);
+        return new Weather(locationName, temperatureFahrenheit, humidityValue);
     }
 
 

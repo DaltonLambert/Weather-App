@@ -5,14 +5,14 @@ public class Weather {
         private int id;
         private String location;
         private double temperature;
-        private Date timestamp;
+        private int humidity;
 
         public Weather() {}
 
-        public Weather(String location, double temperature) {
+        public Weather(String location, double temperature, int humidity) {
             this.location = location;
             this.temperature = temperature;
-            this.timestamp = new Date();
+            this.humidity = humidity;
         }
 
         public int getId() {
@@ -39,13 +39,13 @@ public class Weather {
             this.temperature = temperature;
         }
 
-        public Date getTimestamp() {
-            return timestamp;
-        }
+        public int getHumidity() {
+        return humidity;
+            }
 
-        public void setTimestamp(Date timestamp) {
-            this.timestamp = timestamp;
-        }
+        public void setHumidity(int humidity) {
+        this.humidity = humidity;
+    }
 
         @Override
         public String toString() {
@@ -53,7 +53,7 @@ public class Weather {
                     "id=" + id +
                     ", location='" + location + '\'' +
                     ", temperature=" + temperature +
-                    ", timestamp=" + timestamp +
+                    ", humidity=" + humidity +
                     '}';
         }
     }
