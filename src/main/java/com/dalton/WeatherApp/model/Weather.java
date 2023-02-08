@@ -6,16 +6,18 @@ public class Weather {
         private String location;
         private double temperature;
         private int humidity;
+        private String icon;
 
     private String description;
 
         public Weather() {}
 
-        public Weather(String location, double temperature, int humidity, String description) {
+        public Weather(String location, double temperature, int humidity, String description, String icon) {
             this.location = location;
             this.temperature = temperature;
             this.humidity = humidity;
             this.description = description;
+            this.icon = icon;
         }
 
         public int getId() {
@@ -50,6 +52,14 @@ public class Weather {
         this.humidity = humidity;
     }
 
+        public String getIcon() {
+        return icon;
+             }
+
+        public void setIcon(String icon) {
+        this.icon = icon;
+            }
+
         public String getDescription() {
         return description;
             }
@@ -66,6 +76,7 @@ public class Weather {
                     ", temperature=" + temperature +
                     ", humidity=" + humidity +
                     ", description=" + description +
+                    ", icon=" + icon +
                     '}';
         }
     }

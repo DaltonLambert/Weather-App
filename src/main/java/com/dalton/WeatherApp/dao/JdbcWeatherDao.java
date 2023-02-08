@@ -67,6 +67,7 @@ public class JdbcWeatherDao implements WeatherDao {
         weather.setTemperature(results.getDouble("temperature"));
         weather.setHumidity(results.getInt("humidity"));
         weather.setDescription(results.getString("description"));
+        weather.setIcon(results.getString("icon"));
         return weather;
     }
 }
