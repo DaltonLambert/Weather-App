@@ -105,6 +105,8 @@ public class WeatherController {
         // Convert the temperature from Kelvin to Fahrenheit
         double temperatureFahrenheit = (temperature - 273.15) * 9 / 5 + 32;
 
+        temperatureFahrenheit = Math.round(temperatureFahrenheit);
+
         // Create a new Weather object and return it
         return new Weather(locationName, temperatureFahrenheit, humidityValue);
     }
