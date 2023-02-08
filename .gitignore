@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+application.properties
+hibernate.cfg.xml
+
+
 ### STS ###
 .apt_generated
 .classpath
@@ -32,6 +36,4 @@ build/
 ### VS Code ###
 .vscode/
 
-.application.properties
 
-.hibernate.cfg.xml
