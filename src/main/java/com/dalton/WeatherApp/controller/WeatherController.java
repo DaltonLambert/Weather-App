@@ -50,6 +50,7 @@ public class WeatherController {
             // Extract the location name and temperature from the response
             String locationName = (String) response.get("name");
             Integer humidity = (Integer) ((Map<String, Object>) response.get("main")).get("humidity");
+            String description = (String) response.get("description");
 
             // Check if the humidity value is not null
             if(humidity == null){
@@ -65,7 +66,7 @@ public class WeatherController {
             double temperatureFahrenheit = (temperature - 273.15) * 9 / 5 + 32;
 
             // Create a new Weather object and add it to the weatherList
-            weatherList.add(new Weather(locationName, temperatureFahrenheit, humidityValue));
+            weatherList.add(new Weather(locationName, temperatureFahrenheit, humidityValue, description));
         }
 
         return weatherList;
@@ -91,6 +92,8 @@ public class WeatherController {
         // Extract the location name and temperature from the response
         String locationName = (String) response.get("name");
         Integer humidity = (Integer) ((Map<String, Object>) response.get("main")).get("humidity");
+        List<Map<String, Object>> weather = (List<Map<String, Object>>) response.get("weather");
+        String description = (String) weather.get(0).get("main");
 
         // Check if the humidity value is not null
         if(humidity == null){
@@ -100,6 +103,7 @@ public class WeatherController {
 
         // Convert the humidity value to int
         int humidityValue = humidity.intValue();
+
         double temperature = (double) ((Map<String, Object>) response.get("main")).get("temp");
 
         // Convert the temperature from Kelvin to Fahrenheit
@@ -108,7 +112,7 @@ public class WeatherController {
         temperatureFahrenheit = Math.round(temperatureFahrenheit);
 
         // Create a new Weather object and return it
-        return new Weather(locationName, temperatureFahrenheit, humidityValue);
+        return new Weather(locationName, temperatureFahrenheit, humidityValue, description);
     }
 
 

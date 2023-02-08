@@ -7,12 +7,15 @@ public class Weather {
         private double temperature;
         private int humidity;
 
+    private String description;
+
         public Weather() {}
 
-        public Weather(String location, double temperature, int humidity) {
+        public Weather(String location, double temperature, int humidity, String description) {
             this.location = location;
             this.temperature = temperature;
             this.humidity = humidity;
+            this.description = description;
         }
 
         public int getId() {
@@ -47,6 +50,14 @@ public class Weather {
         this.humidity = humidity;
     }
 
+        public String getDescription() {
+        return description;
+            }
+
+        public void setDescription(String description) {
+        this.description = description;
+            }
+
         @Override
         public String toString() {
             return "Weather{" +
@@ -54,6 +65,7 @@ public class Weather {
                     ", location='" + location + '\'' +
                     ", temperature=" + temperature +
                     ", humidity=" + humidity +
+                    ", description=" + description +
                     '}';
         }
     }
